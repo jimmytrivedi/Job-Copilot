@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 
 object NetworkModule {
-    private const val BASE_URL = "http://10.0.2.2:8000/"
+    private const val BASE_URL = "https://api.jimmytrivedi.in/"
 
     private val json = Json {
         ignoreUnknownKeys = true
