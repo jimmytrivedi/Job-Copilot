@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object NetworkModule {
     private const val BASE_URL = "https://api.jimmytrivedi.in/"
+    private const val API_KEY = "super-secret-change-me"
 
     private val json = Json {
         ignoreUnknownKeys = true
@@ -20,6 +21,12 @@ object NetworkModule {
             .connectTimeout(120, TimeUnit.SECONDS)
             .writeTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .header("X-API-Key", API_KEY)
+                    .build()
+                chain.proceed(request)
+            }
             .addInterceptor(
                 HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BASIC
